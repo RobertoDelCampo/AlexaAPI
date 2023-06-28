@@ -35,7 +35,7 @@ export default function handler(req, res) {
             type: "PlainText",
             text: "La solicitud ha sido procesada correctamente.",
           },
-          shouldEndSession: true,
+          shouldEndSession: false,
         },
       });
     } catch (error) {
