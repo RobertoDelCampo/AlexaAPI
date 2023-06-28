@@ -75,7 +75,7 @@ export default function handler(req, res) {
             type: "PlainText",
             text: text,
           },
-          shouldEndSession: remainSession,
+          shouldEndSession: !remainSession,
         },
       });
     } catch (error) {
