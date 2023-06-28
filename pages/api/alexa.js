@@ -14,6 +14,7 @@ function formatDateTime(date) {
 
 export default function handler(req, res) {
   // Asegúrate de que la solicitud es un POST
+  console.log(`Received a request: ${req}`)
   if (req.method === 'POST') {
     try {
       // Obtiene el cuerpo de la solicitud
