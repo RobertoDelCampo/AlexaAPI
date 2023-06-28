@@ -1,9 +1,4 @@
 import axios from 'axios';
-import fs from 'fs';
-import { promisify } from 'util';
-
-// Convierte fs.writeFile en una función promisificada para que pueda usarse con async/await
-const writeFile = promisify(fs.writeFile);
 
 // Función auxiliar para formatear la fecha y la hora
 function formatDateTime(date) {
@@ -17,7 +12,7 @@ function formatDateTime(date) {
   return `${year}${month}${day}${hours}${minutes}${seconds}`;
 }
 
-export default async function handler(req, res) {
+export default function handler(req, res) {
   // Asegúrate de que la solicitud es un POST
   if (req.method === 'POST') {
     try {
@@ -27,12 +22,21 @@ export default async function handler(req, res) {
       // Crea un nombre de archivo basado en la fecha y hora actuales
       const filename = `log_${formatDateTime(new Date())}.json`;
 
-      // Escribe el archivo .log en el directorio raíz del proyecto. 
-      // Si deseas escribir en un directorio diferente, asegúrate de cambiar la ruta.
-      await writeFile(`./requests/${filename}`, data);
+      // Escribe en la consola de Vercel
+      console.log(`Filename: ${filename}`);
+      console.log(`Data: ${data}`);
 
       // Devuelve una respuesta indicando que la solicitud fue exitosa
-      res.status(200).json({ message: 'Log created successfully.' });
+      res.status(200).json({
+        version: "1.0",
+        response: {
+          outputSpeech: {
+            type: "PlainText",
+            text: "La solicitud ha sido procesada correctamente.",
+          },
+          shouldEndSession: true,
+        },
+      });
     } catch (error) {
       // Maneja cualquier error que pueda ocurrir y devuelve una respuesta de error
       res.status(500).json({ error: 'An error occurred while creating the log.' });
