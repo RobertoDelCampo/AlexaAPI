@@ -70,7 +70,16 @@ export default function handler(req, res) {
       });
     } catch (error) {
       // Maneja cualquier error que pueda ocurrir y devuelve una respuesta de error
-      res.status(500).json({ error: 'An error occurred while processing the request.' });
+      res.status(500).json({ 
+        version: "1.0",
+        response: {
+          outputSpeech: {
+            type: "PlainText",
+            text: `Ocurrio un error: ${error}`
+          },
+          shouldEndSession: true
+        }
+      });
     }
   } else {
     // Si la solicitud no es un POST, devuelve un mensaje de error
