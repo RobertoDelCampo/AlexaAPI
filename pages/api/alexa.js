@@ -57,6 +57,10 @@ export default function handler(req, res) {
         text, remainSession = "Dime, ¿qué deseas hacer?", true;
       }
 
+      console.log("\n\n")
+      console.log(`Texto: ${text}`)
+      console.log(`Sesion: ${remainSession}`)
+
       // Devuelve una respuesta indicando que la solicitud fue exitosa
       res.status(200).json({
         version: "1.0",
@@ -71,7 +75,7 @@ export default function handler(req, res) {
     } catch (error) {
       // Maneja cualquier error que pueda ocurrir y devuelve una respuesta de error
       console.log(`Error: ${error}`)
-      res.status(500).json({ 
+      res.status(200).json({ 
         version: "1.0",
         response: {
           outputSpeech: {
