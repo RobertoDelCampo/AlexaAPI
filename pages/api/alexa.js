@@ -21,12 +21,12 @@ function getMessageByIntent(intent) {
     // Aquí se pueden añadir más casos según las intenciones que se tengan.
     case 'AC_SetTemp':
       var temp = slots.temperatura.value
-      return `La temperatura se ha establecido a ${temp}`, false;
+      return [`La temperatura se ha establecido a ${temp}`, false];
     case 'AC_Off':
-      return 'He apagado el clima', false;
+      return ['He apagado el clima', false];
     default:
       console.log(`Intencion desconocida: ${intentName}`);
-      return 'Intención no reconocida, que deseas hacer?', true;
+      return ['Intención no reconocida, que deseas hacer?', true];
   }
 }
 
@@ -51,10 +51,10 @@ export default function handler(req, res) {
       let text = '';
       let remainSession = false;
       if (intent) {
-        text, remainSession = getMessageByIntent(intent);
+        [text, remainSession] = getMessageByIntent(intent);
       } else {
         // Si no hay intención, pregunta al usuario qué quiere hacer y mantiene la sesión abierta
-        text, remainSession = "Dime, ¿qué deseas hacer?", true;
+        [text, remainSession] = ["Dime, ¿qué deseas hacer?", true];
       }
 
       console.log("\n\n")
