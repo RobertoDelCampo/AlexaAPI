@@ -36,7 +36,7 @@ export default function handler(req, res) {
   if (req.method === 'POST') {
     try {
       // Obtiene el cuerpo de la solicitud
-      const data = JSON.stringify(req.body, null, 2);
+      const data = JSON.stringify(req.body.request, null, 2);
 
       // Crea un nombre de archivo basado en la fecha y hora actuales
       const filename = `log_${formatDateTime(new Date())}.json`;
@@ -70,6 +70,7 @@ export default function handler(req, res) {
       });
     } catch (error) {
       // Maneja cualquier error que pueda ocurrir y devuelve una respuesta de error
+      console.log(`Error: ${error}`)
       res.status(500).json({ 
         version: "1.0",
         response: {
@@ -83,6 +84,7 @@ export default function handler(req, res) {
     }
   } else {
     // Si la solicitud no es un POST, devuelve un mensaje de error
+    console.log(`Se espera una solicitud POST, recibido ${req.method}`);
     res.status(400).json({ error: 'This endpoint requires a POST request.' });
   }
 }
