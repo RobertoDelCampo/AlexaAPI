@@ -12,6 +12,24 @@ function formatDateTime(date) {
   return `${year}${month}${day}${hours}${minutes}${seconds}`;
 }
 
+// Función para obtener el mensaje según la intención
+function getMessageByIntent(intent) {
+  var intentName = intent.name;
+  var slots = intent.slots;
+  
+  switch (intentName) {
+    // Aquí se pueden añadir más casos según las intenciones que se tengan.
+    case 'AC_SetTemp':
+      var temp = slots.temperatura.value
+      return `La temperatura se ha establecido a ${temp}`, false;
+    case 'AC_Off':
+      return 'He apagado el clima', false;
+    default:
+      console.log(`Intencion desconocida: ${intentName}`);
+      return 'Intención no reconocida, que deseas hacer?', true;
+  }
+}
+
 export default function handler(req, res) {
   // Asegúrate de que la solicitud es un POST
   console.log(`Received a request: ${req}`)
@@ -27,20 +45,32 @@ export default function handler(req, res) {
       console.log(`Filename: ${filename}`);
       console.log(`Data: ${data}`);
 
+      // Comprueba si hay una intención
+      const intent = req.body.request.intent;
+      
+      let text = '';
+      let remainSession = false;
+      if (intent) {
+        text, remainSession = getMessageByIntent(intent);
+      } else {
+        // Si no hay intención, pregunta al usuario qué quiere hacer y mantiene la sesión abierta
+        text, remainSession = "Dime, ¿qué deseas hacer?", true;
+      }
+
       // Devuelve una respuesta indicando que la solicitud fue exitosa
       res.status(200).json({
         version: "1.0",
         response: {
           outputSpeech: {
             type: "PlainText",
-            text: "La solicitud ha sido procesada correctamente.",
+            text: text,
           },
-          shouldEndSession: false,
+          shouldEndSession: remainSession,
         },
       });
     } catch (error) {
       // Maneja cualquier error que pueda ocurrir y devuelve una respuesta de error
-      res.status(500).json({ error: 'An error occurred while creating the log.' });
+      res.status(500).json({ error: 'An error occurred while processing the request.' });
     }
   } else {
     // Si la solicitud no es un POST, devuelve un mensaje de error
