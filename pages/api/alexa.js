@@ -26,7 +26,7 @@ function getMessageByIntent(intent) {
       return ['He apagado el clima', false];
     case 'AC_LED':
       return ['He cambiado el estado del LED', false];
-    case 'AC_TURBO':
+    case 'AC_Turbo':
       return ['He cambiado el estado del modo turbo', false];
     case 'AC_Help':
       return ['Puedes pedirme que establezca la temperatura, apagarlo, velocidad del ventilador, modo turbo, apagar o encender LED, y en que modo de ventilacion, frio, ambiente, o seco. Que te gustaria hacer?', true]
