@@ -24,6 +24,12 @@ function getMessageByIntent(intent) {
       return [`La temperatura se ha establecido a ${temp}`, false];
     case 'AC_Off':
       return ['He apagado el clima', false];
+    case 'AC_LED':
+      return ['He cambiado el estado del LED', false];
+    case 'AC_TURBO':
+      return ['He cambiado el estado del modo turbo', false];
+    case 'AMAZON.HelpIntent':
+      return ['Puedes pedirme que establezca la temperatura, apagarlo, velocidad del ventilador, modo turbo, apagar o encender LED, y en que modo de ventilacion, frio, ambiente, o seco. Que te gustaria hacer?', true]
     default:
       console.log(`Intencion desconocida: ${intentName}`);
       return ['Intención no reconocida, que deseas hacer?', true];
