@@ -28,6 +28,10 @@ function getMessageByIntent(intent) {
       return ['He cambiado el estado del LED', false];
     case 'AC_Turbo':
       return ['He cambiado el estado del modo turbo', false];
+    case 'AC_Speed':
+      var speed = slots.velocidad.value;
+      var speedInt = speed == 'automatico' ? 0 : speed == 'bajo' ? 1 : speed == 'medio' ? 2 : speed == 'alto' ? 3 : -1;
+      return [`He establecido la velocidad en ${speed}`, false];
     case 'AC_Help':
       return ['Puedes pedirme que establezca la temperatura, apagarlo, velocidad del ventilador, modo turbo, apagar o encender LED, y en que modo de ventilacion, frio, ambiente, o seco. Que te gustaria hacer?', true]
     default:
