@@ -1,0 +1,47 @@
+{
+  "version": "1.0",
+  "session": {
+    "new": true,
+    "sessionId": "session1234",
+    "application": {
+      "applicationId": "amzn1.echo-sdk-ams.app.1234"
+    },
+    "attributes": {},
+    "user": {
+      "userId": "amzn1.account.AM3B227HF3FAM1B261HK7FFM3A2"
+    }
+  },
+  "context": {
+    "System": {
+      "application": {
+        "applicationId": "amzn1.echo-sdk-ams.app.1234"
+      },
+      "user": {
+        "userId": "amzn1.account.AM3B227HF3FAM1B261HK7FFM3A2"
+      },
+      "device": {
+        "deviceId": "amzn1.ask.device.XXXXXXXXX",
+        "supportedInterfaces": {}
+      },
+      "apiEndpoint": "https://api.amazonalexa.com",
+      "apiAccessToken": "AXXXXXXXXX"
+    }
+  },
+  "request": {
+    "type": "IntentRequest",
+    "requestId": "request5678",
+    "timestamp": "2023-06-28T16:27:01Z",
+    "locale": "en-US",
+    "intent": {
+      "name": "EstablecerTemperatura",
+      "confirmationStatus": "NONE",
+      "slots": {
+        "temperatura": {
+          "name": "temperatura",
+          "value": "23",
+          "confirmationStatus": "NONE"
+        }
+      }
+    }
+  }
+}
