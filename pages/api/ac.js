@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default async function handler(req, res) {
-    console.log(`Received a request: ${req}`)
+    console.log(`Received a request: ${JSON.stringify(req, null, 2)}`)
     if (req.method === 'POST') {
         var { request } = req.body
         const data = JSON.stringify(request, null, 2)
